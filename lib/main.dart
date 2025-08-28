@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,47 +8,126 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Ocean Life',
-      home : Scaffold(
+      title: 'Cities In India',
+      debugShowCheckedModeBanner: true,
+      home: Scaffold(
         appBar: AppBar(
-          title: Text('Oce@n Life',
-          style: TextStyle(color: const Color.fromARGB(255, 1, 36, 64)),),
-          backgroundColor: const Color.fromARGB(255, 53, 161, 249),
+          title: const Text(
+            'Cities In India',
+            style: TextStyle(
+              fontSize: 20,
+              letterSpacing: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: const Color.fromARGB(198, 239, 141, 14),
         ),
-        body: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-          children: [
-            Text('Welcome user!!',style: TextStyle(color: Colors.red)),
-            Icon(Icons.person),
-            Icon(Icons.call),
-            ElevatedButton(onPressed: (){}, 
-            child: Text('Login'),
-            style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue, // Background color of the button
-            foregroundColor: Colors.white, // Text/icon color
-            elevation: 5, // Z-coordinate for the shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-          ),
-  ),
-  ),
-          SizedBox(height: 10,),
-          TextField(
-            decoration: InputDecoration(hintText: "Search here.......",
-            prefixIcon: Icon(Icons.search),
-            border: OutlineInputBorder()),
-          ),
-          Image.network("https://plus.unsplash.com/premium_photo-1661810609562-fc278fedc3f0?q=80&w=2090&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-          Container(height:200,color: Colors.green)
+        body: ListView(
+          padding: const EdgeInsets.all(8),
+          children: const [
+            MyListItem(
+              speciesname: 'Mumbai',
+              imageurl: 'assets/images/a.jpeg',
+              lifespan: 12,
+            ),
+            MyListItem(
+              speciesname: 'Banglore',
+              imageurl: 'assets/images/b.jpeg',
+              lifespan: 8.4,
+            ),
+              MyListItem(
+              speciesname: 'Chennai',
+              imageurl: 'assets/images/c.jpg',
+              lifespan: 6.7,
+            ),
+              MyListItem(
+              speciesname: 'Kolkata',
+              imageurl: 'assets/images/d.jpeg',
+              lifespan: 5.1,
+            ),
+              MyListItem(
+              speciesname: 'Hyderabad',
+              imageurl: 'assets/images/e.jpeg',
+              lifespan: 6.8,
+            ),
+              MyListItem(
+              speciesname: 'Madurai',
+              imageurl: 'assets/images/f.jpg',
+              lifespan: 1,
+            ),
           ],
         ),
-        ),
-      )
+      ),
+    );
+  }
+}
+
+class MyListItem extends StatelessWidget {
+  final String speciesname, imageurl;
+  final double lifespan;
+
+  const MyListItem({
+    super.key,
+    required this.speciesname,
+    required this.imageurl,
+    required this.lifespan,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Colors.grey, width: 0.5),
+      ),
+      elevation: 3,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          // Image section
+          Container(
+            padding: const EdgeInsets.all(12),
+            color: Colors.grey[200],
+            width: 150,
+            height: 150,
+            child: Image.asset(
+              imageurl,
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          // Text section
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    speciesname,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 11, 101, 27),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    "Population: $lifespan millon",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
